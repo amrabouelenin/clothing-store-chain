@@ -14,7 +14,7 @@ and can be deployed with [Kubernetes](https://Kubernetes.io) also can be used wi
 
 This application contains basic design elements for clothing chain shop, However it can be scalled to contain many features and many branches.
 
-![System Architecture](https://raw.githubusercontent.com/amrabouelenin/clothing-store-chain/master/clothes-shope-disributed-scalable-architecture.png)
+![System Architecture](https://github.com/amrabouelenin/clothing-store-chain/clothing-store-chain/blob/master/clothes-shope-disributed-scalable-architecture.png)
 
 Figure 1. shows the basic components for both headquarter and branch offices. in the same time it shows that every branch shall has it's own database instance in order to transfer the load from the centeral server.
 
