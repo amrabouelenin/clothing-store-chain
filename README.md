@@ -36,7 +36,7 @@ As for ERD branch office. it has 4 tables, Products table that contains informat
 The auth table is a common table required for both headquarter and branch office and it is separated in purpose to avoid centeralized authentication from the same server.
 
 ### How to setup the system.
-============================
+
 [to be added later]
 
 
