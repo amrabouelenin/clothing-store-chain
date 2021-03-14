@@ -10,7 +10,9 @@ Below 3 diagram shows the following
 * Simple Entity Relationship Diagram (ERD) for both headquarter and branch offices.
 
 The system can be deployed in containarized environment using Containers application like [Docker](https://docker.org)
-and can be deployed with [Kubernetes](https://Kubernetes.io) also can be used without containers either in one server or distributed accross multiple sever.
+and can be deployed with [Kubernetes](https://Kubernetes.io) also can be used without containers either in one server or distributed accross multiple servers.
 
 This application contains basic design elements for clothing chain shop, However it can be scalled to contain many features and many branches.
+
+[![System Architecture](https://github.com/amrabouelenin/clothing-store-chain/blob/master/Clothes%20Shop%20-%20%20Scalable%20Archticture.png)]
 
