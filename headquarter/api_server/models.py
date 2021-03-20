@@ -20,7 +20,7 @@ class Branch(models.Model):
         return self.name
 
 # Daily revenu report
-class DailyRevenu(models.Model):
+class DailyRevenue(models.Model):
     
     # Id of the branch sending the revenu
     Branch = models.ForeignKey(Branch, null=True, blank=True, on_delete=models.DO_NOTHING)
@@ -34,4 +34,4 @@ class DailyRevenu(models.Model):
     loses = models.FloatField(max_length=150, verbose_name='Amount of losses in Dollar$')
 
     def __str__(self):
-        return self.id
+        return str(self.id)
