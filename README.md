@@ -46,7 +46,9 @@ The auth table is a common table required for both headquarter and branch office
 * user restframework for authentication user
 * implement client to use the restfult webservice from the headquarter (Headquarter client) Required models[Branch]
 * implement client to use the restfult webservice from the branch (Headquarter client) required models [DailyRevenue]
-* create the required reports for the project:
+* implement cron job that just call the send revenue webservice from headquarter
+
+* Create the required reports for the project:
    1 . Feasibility study of communication between systems
         preparation of a working Web Service (or Web Services) in selected technologies
         basic working client of Web Service (console, graphical, mobile, or web application)
@@ -68,7 +70,7 @@ The auth table is a common table required for both headquarter and branch office
         presentation of running applications
         presentation of data exchange or data synchronization between headquarters and branches
 
-   4 . Performance analysis, summary and conclusions of the project
+   4 . Performance analysis, summary and conclusions of the project [Amro, Onur]
         description of methodology of testing the presentation layer, or other parts of your system (what and how has been tested)
         include the results of measurements (not screenshots!)
         analysis of results

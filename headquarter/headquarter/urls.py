@@ -16,8 +16,23 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 import api_server.urls
+from rest_framework.schemas import get_schema_view
+from rest_framework.authtoken import views
+
+
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/', include(api_server.urls))
+    path('api/', include(api_server.urls)),
+    path('openapi', get_schema_view(
+        title="Clothing Store Chain",
+        description="API for all different services availble",
+        version="1.0.0"
+    ), name='openapi-schema'),
+   path('api/token/', views.obtain_auth_token, name='token_obtain_pair'),
+
 ]

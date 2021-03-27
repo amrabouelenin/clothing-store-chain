@@ -1,9 +1,11 @@
 from django.shortcuts import render
 from django.http import JsonResponse
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework.response import Response
 from .serializers import DailyRevneuSerializer, BranchSerializer
 from .models import DailyRevenue, Branch
+from rest_framework import permissions, authentication
+from rest_framework.permissions import IsAuthenticated
 
 # Overview of the api server urls
 @api_view(['GET'])
@@ -24,7 +26,7 @@ def ApiOverview(request):
 
         'Daily Revneue APIs': {
 
-            'Send Revenue': 'api/send/revenue/',
+            'Send Revenue': 'api/send-revenue/',
             'List Revenues': 'api/list/revenue/',
 
         }
@@ -62,6 +64,7 @@ def BranchDetail(request, pk):
 
 # Branch service call to send it's daily revnu and loses
 @api_view(['POST'])
+@permission_classes((IsAuthenticated, ))
 def SendRevenue(request):
     
     # save json data recieved from post into revenu table
@@ -73,8 +76,10 @@ def SendRevenue(request):
 
 # Return revenue history
 @api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+#@authentication_classes(authentication.TokenAuthentication,)
 def RevenueList(request):
-   
+    
     revenue_list = DailyRevenue.objects.all()
     serializer = DailyRevneuSerializer(revenue_list, many=True)
 

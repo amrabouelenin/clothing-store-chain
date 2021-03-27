@@ -13,5 +13,4 @@ urlpatterns = [
     ## Daily revenue urls
     path('send-revenue/', views.SendRevenue, name='send-revenue'),
     path('list/revenue/', views.RevenueList, name='revenue-list'),
-
 ]
