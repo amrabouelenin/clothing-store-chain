@@ -7,7 +7,7 @@ import requests, json
 API_ENDPOINT = "http://127.0.0.1:8000/api/"
 
 # Credentials of api user
-credentials = { 'username' : 'amro', 'password' : 'amr12amr' }
+credentials = { 'username' : 'testapi', 'password' : 'testapi' }
 
 # service path
 api_url = "token/"
