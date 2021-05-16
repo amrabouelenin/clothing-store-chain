@@ -1,0 +1,153 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<br></br>
+<h1>Transactions</h1>
+<div class="container">
+
+    <br>
+    <p>This form is authenticated to let the branch office operator save new Transaction in the system through
+        <code class="highlighter-rouge">Json API Calls</code>. <strong>. it access the Branch API_ENDPOINT and save data</strong>. 
+        when you hit submit button, it is automatically updating the current page with the new added transaction.
+        API_END_POINTs used:  <code class="highlighter-rouge">http://127.0.0.1:8000/api/add/transaction/</code>.<br>
+        <code class="highlighter-rouge">http://127.0.0.1:8000/api/list/transactions/</code>.
+    </p>
+		<div id="transaction-container">
+			<div id="form-wrapper">
+
+                <form id="form" class="form-inline">
+                    <div class="form-group mb-2">
+                      <label for="id" class="sr-only">Product Id</label>
+                      <input type="text" id="id" class="form-control" type="text" name="id" placeholder="Product id" >
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="amount" class="sr-only">Amount</label>
+                        <input type="text" id="amount" class="form-control" type="text" name="id" placeholder="amount" >
+                    </div>
+                    <input id="submit" class="btn btn-primary mb-2" type="submit" >
+                  </form>
+
+
+			</div>
+
+			<div >
+                <table class="table">
+                    <caption>List of Transactions</caption>
+                    <thead>
+                        <tr>
+                        <th scope="col">Transaction Id</th>
+                        <th scope="col">Product Id</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Created</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list-wrapper">
+
+                    </tbody>
+                </table>
+
+			</div>	
+		</div>
+
+    <script type="text/javascript">
+    
+    listTransactions()
+    
+    function listTransactions(){
+
+        // the element the will be filled by ajax
+        var wrapper = document.getElementById('list-wrapper')
+
+        // create api call to server endpoint
+        
+        var API_ENDPOINT = 'http://127.0.0.1:8000/api/list/transactions/'
+
+
+        // make the call
+        fetch(API_ENDPOINT).then((resp)=>resp.json()).then(function(data){
+            // console.log('Data:', data)
+            // now iterate through the data and put it in table
+            for (var i in data){
+
+                try {
+                    document.getElementById(`data-row-${i}`).remove()
+                } catch (error) {
+                    
+                }
+
+                var id = data[i].id
+                var product_id = data[i].product
+                var amount = data[i].amount
+                var created = data[i].created
+
+                //console.log(serial)
+                // generate html row from above data
+                var row = `
+                        <tr id="data-row-${i}" class="task-wrapper flex-wrapper">
+                            <th scope="row">${id}</th>
+                            <td>${product_id}</td>
+                            <td>${amount}</td>
+                            <td>${created}</td>
+                        </tr>
+					`
+                //console.log(row)
+                wrapper.innerHTML += row
+            }
+        })
+    }
+    function getCookie(name) {
+		var cookieValue = null;
+		if (document.cookie && document.cookie !== '') {
+		    var cookies = document.cookie.split(';');
+		    for (var i = 0; i < cookies.length; i++) {
+		        var cookie = cookies[i].trim();
+		        // Does this cookie string begin with the name we want?
+		        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		            break;
+		        }
+		    }
+		}
+		return cookieValue;
+	}
+	var csrftoken = getCookie('csrftoken')
+    // handle submit button
+    var form = document.getElementById('form-wrapper')
+    form.addEventListener('submit', function(e){
+        
+        // prevent submittion to handle it through ajax
+        e.preventDefault()
+
+        var API_ENDPOINT = 'http://127.0.0.1:8000/api/add/transaction/'
+
+        // check values 
+        var product_id = document.getElementById('id').value
+        var amount = document.getElementById('amount').value
+
+        // make the call
+        fetch(API_ENDPOINT, { 
+            
+            // put the credential here
+            method:'POST',
+			headers:{
+				'Content-type':'application/json',
+				'X-CSRFToken':csrftoken,
+			},
+			body:JSON.stringify({'product':product_id, 'amount':amount})
+ 
+        }).then(function(response){
+                console.log(response)
+                // update the list after adition
+				listTransactions()
+                // reset the form elements
+				document.getElementById('form').reset()
+
+		})
+        
+    })
+
+    </script>
+
+</div>
+{% endblock %}

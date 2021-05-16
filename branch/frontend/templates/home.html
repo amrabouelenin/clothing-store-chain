@@ -1,0 +1,28 @@
+{% extends "base.html"  %}
+{% include 'menu.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+<br></br>
+<h1>Clothing Shop - Branch Office</h1>
+
+
+<p>This system is utilizing Json API approach and expose web services for different types of client in order to 
+  interact with the backend database, currently the branch office only handles products and transaction management.
+  and it was meant to prove how both backend and clients will be able to work togeather.
+
+  Below are the API urls that has been used for that purpose: <br><br>
+</p>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><code class="highlighter-rouge">http://127.0.0.1:8000/api/add/product/</code></li>
+    <li class="list-group-item"><code class="highlighter-rouge">http://127.0.0.1:8000/api/list/products/</code></li>
+    <li class="list-group-item"><code class="highlighter-rouge">http://127.0.0.1:8000/api/add/transaction/</code>.</li>
+    <li class="list-group-item"><code class="highlighter-rouge">http://127.0.0.1:8000/api/list/transactions/</code>.</li>
+  </ul>
+
+
+
+
+{% endblock %}

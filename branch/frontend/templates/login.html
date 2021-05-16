@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Branch Office</title>
+
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+  </head>
+
+{% load bootstrap4 %}
+
+<body class="text-center">
+    <div class="container mycontent">
+        {% block content %}
+        <div class="container">
+            <h1>Login</h1>
+            <form method="POST" class="mt-5">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <input type="submit" value="Sign in" class="btn btn-block btn-primary">
+                {% if not next or not next.strip %}
+                {# avoid django.contrib.auth.views.login s default of /account/profile/ #}
+                {% url 'afterlogindefaultview' as next %}
+                {% endif %}
+                <input type="hidden" name="next" value="home" />
+             <div class="mt-3">
+        </div>
+        {% endblock %}
+
+      </div>
+  </body>
+</html>
+
