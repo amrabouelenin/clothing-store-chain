@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+{% load bootstrap4 %}
+
+{% block content %}
+<br></br>
+<h1>Daily Reports</h1>
+<div class="container">
+
+    <br>
+    <p>This page for authenticated users to let the headquarter office operator to check on recieved daily reports, daily revenues services returns
+        <code class="highlighter-rouge">Json data</code>, <strong>Access to Headquarter API_ENDPOINT and display results</strong>. 
+        API_END_POINTS used: <code class="highlighter-rouge">http://127.0.0.1:8001/api/list/revenue/</code>. <br>
+    </p>
+		<div id="product-container">
+			<div id="form-wrapper">
+<!-- 
+                <form id="form" class="form-inline">
+                    <div class="form-group mb-2">
+                      <label for="name" class="sr-only">Product Id</label>
+                      <input type="text" id="name" class="form-control" type="text" name="id" placeholder="Product Name" >
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="price" class="sr-only">Price in USD</label>
+                        <input type="text" id="price" class="form-control" type="text" name="id" placeholder="price" >
+                    </div>
+                    <input id="submit" class="btn btn-primary mb-2" type="submit" >
+                  </form> -->
+
+
+
+
+			</div>
+
+			<div >
+                <table class="table">
+                    <caption>Daily reports</caption>
+                    <thead>
+                        <tr>
+                        <th scope="col">Id</th>
+
+                        <th scope="col">Branch</th>
+                        <th scope="col">date</th>
+                        <th scope="col">Profit</th>
+                        <th scope="col">loss</th>
+                        </tr>
+                    </thead>
+                    <tbody id="list-wrapper">
+
+                    </tbody>
+                </table>
+
+			</div>	
+		</div>
+
+    <!--
+
+        Write Js script to use API server:
+
+        Tasks required
+
+        Js Code
+        1. create a call to API Endpoint to retireve list of products
+
+        2. create action on submit button to save new product from html input form
+
+        Html Code
+        
+
+
+    -->
+    <script type="text/javascript">
+    
+    listDailyRevneue()
+    
+    function listDailyRevneue(){
+
+        // the element the will be filled by ajax
+        var wrapper = document.getElementById('list-wrapper')
+
+        // create api call to server endpoint
+        
+        var API_ENDPOINT = 'http://127.0.0.1:8001/api/list/revenue/'
+
+
+        // make the call
+        fetch(API_ENDPOINT).then((resp)=>resp.json()).then(function(data){
+            console.log('Data:', data)
+            // now iterate through the data and put it in table
+            for (var i in data){
+
+                try {
+                    document.getElementById(`data-row-${i}`).remove()
+                } catch (error) {
+                    
+                }
+
+                var id = `<span class="title">${data[i].id}</span>`
+
+                var branch = `<span class="title">${data[i].Branch}</span>`
+                var date= `<span class="title">${data[i].date}</span>`
+                var revenue = `<span class="title">${data[i].revenu}</span>`
+                var loss = `<span class="title">${data[i].loses}</span>`
+
+                var serial =  parseInt(i)
+                //console.log(serial)
+                // generate html row from above data
+                var row = `
+                        <tr id="data-row-${serial}" class="task-wrapper flex-wrapper">
+                            <th scope="row">${serial}</th>
+                            <td>${branch}</td>
+                            <td>${date}</td>
+                            <td>${revenue}</td>
+                            <td>${loss}</td>
+                        </tr>
+					`
+                //console.log(row)
+                wrapper.innerHTML += row
+            }
+        })
+    }
+    function getCookie(name) {
+		var cookieValue = null;
+		if (document.cookie && document.cookie !== '') {
+		    var cookies = document.cookie.split(';');
+		    for (var i = 0; i < cookies.length; i++) {
+		        var cookie = cookies[i].trim();
+		        // Does this cookie string begin with the name we want?
+		        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		            break;
+		        }
+		    }
+		}
+		return cookieValue;
+	}
+	var csrftoken = getCookie('csrftoken')
+    // handle submit button
+    var form = document.getElementById('form-wrapper')
+    form.addEventListener('submit', function(e){
+        
+        // prevent submittion to handle it through ajax
+        e.preventDefault()
+
+        var API_ENDPOINT = 'http://127.0.0.1:8000/api/add/product/'
+
+        // check values 
+        var name = document.getElementById('name').value
+        var price = document.getElementById('price').value
+
+        // make the call
+        fetch(API_ENDPOINT, { 
+            
+            // put the credential here
+            method:'POST',
+			headers:{
+				'Content-type':'application/json',
+				'X-CSRFToken':csrftoken,
+			},
+			body:JSON.stringify({'name':name, 'price':price})
+ 
+
+        }).then(function(response){
+                console.log(response)
+                // update the list after adition
+				listProudcts()
+                // reset the form elements
+				document.getElementById('form').reset()
+
+		})
+        
+    })
+
+    </script>
+
+</div>
+{% endblock %}

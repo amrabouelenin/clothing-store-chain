@@ -1,0 +1,27 @@
+{% extends "base.html"  %}
+{% include 'menu.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+<br></br>
+<h1>Clothing Shop - Headquarter Office</h1>
+
+
+<p>
+  This is the headquarter user interface, it has menu item for showing the daily reports
+  recieved from every branch in a daily basis
+
+  Below are the API urls that has been used for that purpose: <br><br>
+</p>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><code class="highlighter-rouge">http://127.0.0.1:8000/api/servicecall-update/" + str(call['id']) +  str("/")</code></li>
+    <li class="list-group-item"><code class="highlighter-rouge">http://127.0.0.1:8000/api/transactions_today</code></li>
+    <li class="list-group-item"><code class="highlighter-rouge">http://127.0.0.1:8001/api/send-revenue</code>.</li>
+  </ul>
+
+
+
+
+{% endblock %}
