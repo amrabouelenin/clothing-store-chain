@@ -25,7 +25,9 @@ SECRET_KEY = 'l%i1^p8a_i77_!&r6)8sh!cq0w!gzspj0agf_is08y=*9@d4lp'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['167.71.9.235', ]
+ALLOWED_HOSTS = ['167.71.9.235', '127.0.0.1' ]
+
+
 
 
 # Application definition
@@ -37,6 +39,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'rest_framework.authtoken',
+    'api_server',
+    'products',
+    'unixtimestampfield',
+    'frontend',
+    'bootstrap4'
 ]
 
 MIDDLEWARE = [
@@ -69,6 +78,18 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'branch.wsgi.application'
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_AUTHENTICATION_CLASSES': (
+#         #'rest_framework_simplejwt.authentication.JWTAuthentication',
+#         #'rest_framework.authentication.SessionAuthentication',
+#         'rest_framework.authentication.TokenAuthentication',
+
+
+#     ),
+#     'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+#     )
+# }
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
@@ -79,6 +100,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
 
 
 # Password validation
@@ -118,3 +141,4 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
