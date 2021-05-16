@@ -76,7 +76,7 @@ def SendRevenue(request):
 
 # Return revenue history
 @api_view(['GET'])
-@permission_classes((IsAuthenticated, ))
+#@permission_classes((IsAuthenticated, ))
 #@authentication_classes(authentication.TokenAuthentication,)
 def RevenueList(request):
     

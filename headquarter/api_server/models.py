@@ -1,6 +1,6 @@
 from django.db import models
 import time
-
+from datetime import date
 # Branch Model
 class Branch(models.Model):
     
@@ -26,7 +26,7 @@ class DailyRevenue(models.Model):
     Branch = models.ForeignKey(Branch, null=True, blank=True, on_delete=models.DO_NOTHING)
 
     # date of the report send from the branch office
-    date = models.PositiveIntegerField(verbose_name='Datetime Unix',default=int(time.time()))
+    date = models.DateField(default=date.today) #models.PositiveIntegerField(verbose_name='Datetime Unix',default=int(time.time()))
     # value of the revenue of the day
     revenu = models.FloatField(max_length=150,verbose_name='Revenus in Dollar$')
 

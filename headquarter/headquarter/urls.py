@@ -33,6 +33,8 @@ urlpatterns = [
         description="API for all different services availble",
         version="1.0.0"
     ), name='openapi-schema'),
-   path('api/token/', views.obtain_auth_token, name='token_obtain_pair'),
+    path('api/token/', views.obtain_auth_token, name='token_obtain_pair'),
+    path('', include(('frontend.urls', 'frontend'), namespace='frontend')),
+
 
 ]
